@@ -1,0 +1,34 @@
+body{
+  padding-top: 50px;
+}
+
+.right {
+  float: right;
+}
+
+.right:hover {
+  color: #337AB7;
+  cursor: pointer;
+}
+
+.remove{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.remove:hover,.arrow:hover{
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.remove:hover {
+  color: #D9534F;
+}
+
+.left {
+  float: left;
+}
+
+li:hover{
+  background-color: #F7F7F9;
+}
