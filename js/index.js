@@ -2,12 +2,16 @@ new Vue({
   el: '#app',
   data:{
     bucket: new AWS.S3({params: {Bucket: 'go-labs-videos'}}),
-    status: '',
     loading: false,
     files: []
   },
   mounted: function() {
     this.loadFiles();
+  },
+  computed: {
+    titleClass: function () {
+      return this.loading ? 'text-primary loading dots' : 'text-primary';
+    }
   },
   methods:{
     loadFiles: function () {
@@ -15,9 +19,8 @@ new Vue({
       self.loading = true;
       self.bucket.listObjects(function (err, data) {
         if (err) {
-          self.status = 'Could not load objects from S3';
+          console.log(err, err.stack);
         } else {
-          self.status = 'Loaded ' + data.Contents.length + ' items from S3';
           self.files = data.Contents
         }
         self.loading = false;
@@ -53,6 +56,22 @@ new Vue({
         }
         self.loading = false;
       });
+    },
+    uploadFile: function () {
+      var file = this.$refs.file_chooser.files[0];
+      var self = this;
+      if (file) {
+        var params = {Key: file.name, ContentType: file.type, Body: file};
+        self.loading = true;
+        this.bucket.upload(params, function (err, data) {
+          if (err) {
+            console.log(err, err.stack); // an error occurred
+          } else {
+            self.loadFiles();
+          }
+          self.loading = false;
+        });
+      }
     }
   }
 });

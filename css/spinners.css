@@ -7,6 +7,7 @@
   margin-top: -0.3em;
   line-height: 1.5em;
   vertical-align: text-bottom;
+  color: #337AB7;
 }
 
 .loading::after {

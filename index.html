@@ -10,9 +10,8 @@
   <body>
 
     <div id="app" class="container">
-      <h2 class="text-center">
-        Serverless example
-        <span v-if="loading" class="loading dots"></span>
+      <h2 v-bind:class="titleClass">
+        SERVERLESS EXAMPLE
       </h2>
       <hr>
       <div class="row">
@@ -27,8 +26,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12">
-          <div class="well" v-if="status">{{status}}</div>
+        <div class="col-sm-6">
+          <button class="btn btn-primary btn-block" @click="loadFiles()">REFRESH</button>
+        </div>
+        <div class="col-sm-6">
+          <label class="btn btn-primary btn-file btn-block">
+            <input ref="file_chooser" type="file" name="file-chooser" @change="uploadFile()" style="display: none;">
+            UPLOAD FILE
+          </label>
         </div>
       </div>
     </div>
